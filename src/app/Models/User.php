@@ -7,6 +7,7 @@ use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -16,6 +17,10 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory,HasRoles, Notifiable;
 
+    public function expenses(): HasMany
+    {
+        return $this->hasMany(Expense::class);
+    }
     /**
      * The attributes that are mass assignable.
      *
